@@ -431,6 +431,8 @@ class FantasyFootballReport(object):
                 / f"{self.league.name.replace(' ', '-')}({self.league_id})"
         )
         report_title_text = f"{self.league.name} ({self.league_id}) Week {self.league.week_for_report} Report"
+        # ! Remove donation text from the final page of report
+        """
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
@@ -439,6 +441,15 @@ class FantasyFootballReport(object):
             f"<br></br><br></br><br></br>"
             f"If you enjoy using the Fantasy Football Metrics Weekly Report app, please feel free help support its "
             f"development below:"
+            f"</para>"
+        )
+        """
+        report_footer_text = (
+            f"<para alignment='center'>"
+            f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
+            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
+            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
+            f"<br></br><br></br><br></br>"
             f"</para>"
         )
 
