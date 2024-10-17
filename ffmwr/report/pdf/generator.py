@@ -634,6 +634,7 @@ class PdfGenerator(object):
         self.zscores_headers = [["Place", "Team", "Manager", "Z-Score"]]
         self.scores_headers = [["Place", "Team", "Manager", "Points", "Season Avg. (Place)"]]
         self.efficiency_headers = [["Place", "Team", "Manager", "Coaching Efficiency (%)", "Season Avg. (Place)"]]
+<<<<<<< HEAD
         self.luck_headers = [[
             "Place",
             "Team",
@@ -643,6 +644,9 @@ class PdfGenerator(object):
             "Week Record (W-L)",
             "Season Record (W-L) (Place)"
         ]]
+=======
+        self.luck_headers = [["Place", "Team", "Manager", "Luck", "Season Avg. (Place)", "Week/Seas Rec. (Pl.)"]]
+>>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
         self.optimal_scores_headers = [["Place", "Team", "Manager", "Optimal Points", "Season Total (Place)"]]
         self.bad_boy_headers = [["Place", "Team", "Manager", "Bad Boy Pts", "Worst Offense", "# Offenders"]]
         self.beef_headers = [["Place", "Team", "Manager", "TABBU(s)"]]

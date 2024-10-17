@@ -340,6 +340,7 @@ class FantasyFootballReport(object):
                             time_series_luck[team.name] = {'name': team.name, 'wins': wins, 'losses': losses}
             week_counter += 1
 
+<<<<<<< HEAD
 
         # ============================================================
         # Season Luck
@@ -349,6 +350,14 @@ class FantasyFootballReport(object):
         # Calculate Season Luck Record and resolve ties
         sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
         team_index = 0
+=======
+        # Calculate Season Luck Record and resolve ties
+
+        sorted_time_series_luck = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
+
+        team_index = 0
+
+>>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
         for i in sorted_time_series_luck:
             team_index += 1
             if team_index == 1:
@@ -381,6 +390,7 @@ class FantasyFootballReport(object):
                             wins = sorted_time_series_luck[i]['wins']
                             losses = sorted_time_series_luck[i]['losses']
                             season_luck = sorted_time_series_luck[i]['season_luck']
+<<<<<<< HEAD
                             team_luck_data_entry.extend(
                                 [
                                     team.weekly_overall_record.get_record_str(),
@@ -388,6 +398,9 @@ class FantasyFootballReport(object):
                                 ]
                             )
                             # team_luck_data_entry.append(team.weekly_overall_record.get_record_str() + " / " + str(wins) + "-" + str(losses) + " (" + str(season_luck) + ")")
+=======
+                            team_luck_data_entry.append(team.weekly_overall_record.get_record_str() + " / " + str(wins) + "-" + str(losses) + " (" + str(season_luck) + ")")
+>>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
 
         # add season total optimal points to optimal points data
         sorted_season_total_optimal_points_data = dict(
