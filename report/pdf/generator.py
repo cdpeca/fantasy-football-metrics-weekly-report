@@ -1458,6 +1458,8 @@ class PdfGenerator(object):
         # document title
         elements.append(self.report_title)
         elements.append(self.spacer_tenth_inch)
+        # ! Do not include author donation in header / table of contents page
+        """
         donate_header_data = [[
             Paragraph(
                 "Enjoying the app? Please consider donating to support its development:", self.text_style_italics),
@@ -1466,6 +1468,8 @@ class PdfGenerator(object):
                 hyperlink="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS"
             )
         ]]
+        """
+        donate_header_data=[[Paragraph("")]]
         elements.append(Table(donate_header_data, colWidths=[4.65 * inch, 1.00 * inch], style=self.header_style))
         elements.append(self.spacer_tenth_inch)
 
@@ -1937,7 +1941,8 @@ class PdfGenerator(object):
             elements.insert(4, toc)
 
         elements.append(self.report_footer_title)
-        elements.append(self.report_footer)
+        # ! Do not include author donations in footer
+        #elements.append(self.report_footer)
 
         # build pdf
         logger.info(f"generating PDF ({str(filename_with_path).split('/')[-1]})...")
