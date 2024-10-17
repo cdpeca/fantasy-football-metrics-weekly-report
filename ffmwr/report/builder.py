@@ -472,8 +472,13 @@ class FantasyFootballReport(object):
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
+<<<<<<< HEAD
             f'Fantasy Football league "{self.league.name}" with id {self.league_id} '
             f'(<a href="{self.league.url}" color=blue><u>{self.league.url}</u></a>).'
+=======
+            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
+            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
+>>>>>>> 4b14ce0 (removed ads)
             f"<br></br><br></br><br></br>"
             f"</para>"
         )

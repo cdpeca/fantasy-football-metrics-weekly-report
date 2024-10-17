@@ -1832,6 +1832,9 @@ class PdfGenerator(object):
         elements.append(self.report_title)
         elements.append(self.spacer_tenth_inch)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4b14ce0 (removed ads)
         # ! Do not include author donation in header / table of contents page
         """
         donate_header_data = [[
@@ -1844,6 +1847,7 @@ class PdfGenerator(object):
         ]]
         """
         donate_header_data=[[Paragraph("")]]
+<<<<<<< HEAD
 =======
         donate_header_data = [
             [
@@ -1857,6 +1861,8 @@ class PdfGenerator(object):
             ]
         ]
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+>>>>>>> 4b14ce0 (removed ads)
         elements.append(Table(donate_header_data, colWidths=[4.65 * inch, 1.00 * inch], style=self.header_style))
         elements.append(self.spacer_tenth_inch)
 
