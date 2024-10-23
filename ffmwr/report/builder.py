@@ -5,7 +5,7 @@ import os
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 
 from ffmwr.calculate.coaching_efficiency import CoachingEfficiency
 from ffmwr.calculate.metrics import CalculateMetrics

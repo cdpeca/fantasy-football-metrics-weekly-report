@@ -1041,11 +1041,11 @@ class PdfGenerator(object):
     def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
         if metric_type in ["scores", "coaching_efficiency"]:
             if not self.break_ties:
-                return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+                return Paragraph(self.tie_for_first_footer, self.text_style_medium)
             else:
                 return None
         else:
-            return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+            return Paragraph(self.tie_for_first_footer, self.text_style_medium)
 
     def create_title(
         self,
@@ -1123,7 +1123,7 @@ class PdfGenerator(object):
 
         # reduce manager string max characters for standings metric to accommodate narrower column widths
         manager_header_ndx = None
-        if metric_type == "standings":
+        if metric_type == "standings" or metric_type == "luck":
             for header_ndx, header in enumerate(col_headers[0]):
                 if header == "Manager":
                     manager_header_ndx = header_ndx
