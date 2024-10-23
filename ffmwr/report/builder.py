@@ -327,10 +327,14 @@ class FantasyFootballReport(object):
         # Calculate Season Luck Record and resolve ties
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
 =======
         sorted_time_series_luck = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
 >>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
+=======
+        sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
+>>>>>>> a9e2107 (updated luck table to support new columns)
 
         team_index = 0
 
@@ -363,6 +367,7 @@ class FantasyFootballReport(object):
                     for i in sorted_time_series_luck:
                         if team_luck_data_entry[1] == sorted_time_series_luck[i]['name']:
 <<<<<<< HEAD
+<<<<<<< HEAD
                             wins = sorted_time_series_luck[i]['wins']
                             losses = sorted_time_series_luck[i]['losses']
                             season_luck = sorted_time_series_luck[i]['season_luck']
@@ -379,6 +384,17 @@ class FantasyFootballReport(object):
                             season_luck = sorted_time_series_luck[i]['season_luck']
                             team_luck_data_entry.append(team.weekly_overall_record.get_record_str() + " / " + str(wins) + "-" + str(losses) + " (" + str(season_luck) + ")")
 >>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
+=======
+                            wins = sorted_time_series_luck[i]['wins']
+                            losses = sorted_time_series_luck[i]['losses']
+                            season_luck = sorted_time_series_luck[i]['season_luck']
+                            team_luck_data_entry.extend(
+                                [
+                                    team.weekly_overall_record.get_record_str(),
+                                    f"{wins}-{losses} ({season_luck})"
+                                ]
+                            )
+>>>>>>> a9e2107 (updated luck table to support new columns)
 
         # add season total optimal points to optimal points data
         sorted_season_total_optimal_points_data = dict(
