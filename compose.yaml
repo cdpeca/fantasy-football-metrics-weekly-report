@@ -1,9 +1,9 @@
 services:
-  app:
-    image: ghcr.io/uberfastman/fantasy-football-metrics-weekly-report:21.0.4  # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
-    platform: linux/amd64
-    ports:
-    - "5001:5000"
-    volumes:
-    - /etc/localtime:/etc/localtime:ro   # sync container timezone with host
-    - .:/opt/ffmwr   # mount host repository directory
+    app:
+        image: ghcr.io/uberfastman/fantasy-football-metrics-weekly-report:21.0.4 # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
+        platform: linux/amd64
+        ports:
+            - '5001:5000'
+        volumes:
+            - /etc/localtime:/etc/localtime:ro # sync container timezone with host
+            - .:/opt/ffmwr # mount host repository directory

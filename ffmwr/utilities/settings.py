@@ -337,6 +337,26 @@ class AppSettings(CustomSettings):
         extra="ignore",  # allow, forbid, or ignore
     )
 
+    ffmwr_version_major: int = Field(
+        title=__qualname__,
+        description="Fantasy Football Metrics Weekly Report major version",
+
+    )
+    ffmwr_version_minor: int = Field(
+        title=__qualname__,
+        description="Fantasy Football Metrics Weekly Report minor version",
+
+    )
+    ffmwr_version_patch: int = Field(
+        title=__qualname__,
+        description="Fantasy Football Metrics Weekly Report patch version",
+
+    )
+    @computed_field
+    @property
+    def ffmwr_version(self) -> str:
+        return f"v{self.ffmwr_version_major}.{self.ffmwr_version_minor}.{self.ffmwr_version_patch}"
+
     log_level: str = Field(
         "info", title=__qualname__, description="logger output level: notset, debug, info, warning, error, critical"
     )

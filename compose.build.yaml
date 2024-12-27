@@ -1,10 +1,9 @@
 services:
-
-  app:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-      args: # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
-      - BUILD_PLATFORM=linux/amd64
-      - PYTHON_VERSION_MAJOR=3
-      - PYTHON_VERSION_MINOR=13
+    app:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+            args: # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
+                - BUILD_PLATFORM=linux/amd64
+                - PYTHON_VERSION_MAJOR=3
+                - PYTHON_VERSION_MINOR=13
