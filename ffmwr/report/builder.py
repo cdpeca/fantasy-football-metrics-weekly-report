@@ -11,11 +11,19 @@ from ffmwr.calculate.coaching_efficiency import CoachingEfficiency
 from ffmwr.calculate.metrics import CalculateMetrics
 from ffmwr.calculate.points_by_position import PointsByPosition
 from ffmwr.calculate.season_averages import SeasonAverageCalculator
+<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseLeague, BaseTeam
 from ffmwr.report.data import ReportData
 from ffmwr.report.pdf.generator import PdfGenerator
 from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
+=======
+from ffmwr.models.base.model import BaseLeague, BaseTeam
+from ffmwr.dao.platforms.base.platform import BasePlatform
+from ffmwr.report.data import ReportData
+from ffmwr.report.pdf.generator import PdfGenerator
+from ffmwr.utilities.app import platform_data_factory, patch_http_connection_pool
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 from ffmwr.utilities.utils import format_platform_display
@@ -438,8 +446,8 @@ class FantasyFootballReport(object):
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
-            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
-            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
+            f'Fantasy Football league "{self.league.name}" with id {self.league_id} '
+            f'(<a href="{self.league.url}" color=blue><u>{self.league.url}</u></a>).'
             f"<br></br><br></br><br></br>"
             f"</para>"
         )

@@ -154,7 +154,11 @@ class PlayoffProbabilities(FFMWRPythonObjectJson):
         week_for_report: int,
         standings: List[BaseTeam],
         remaining_matchups: Dict[str, List[Tuple[BaseMatchup]]],
+<<<<<<< HEAD
     ) -> Optional[Dict[str, List[Any]]]:
+=======
+    ) -> Union[None, Dict[str, List[Any]]]:
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         logger.debug("Calculating playoff probabilities.")
 
         teams_for_playoff_probs = {}

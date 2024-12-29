@@ -8,7 +8,11 @@ from typing import Dict, List, Set
 from ffmwr.models.base.model import BaseLeague, BasePlayer
 from ffmwr.utilities.constants import prohibited_statuses
 from ffmwr.utilities.logger import get_logger
+<<<<<<< HEAD
 from ffmwr.utilities.utils import generate_normalized_player_key
+=======
+from ffmwr.utilities.utils import normalize_player_name
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
 logger = get_logger(__name__, propagate=False)
 
@@ -109,7 +113,11 @@ class CoachingEfficiency(object):
     @staticmethod
     def _create_open_slot_if_possible(
         unassigned_player: BasePlayer,
+<<<<<<< HEAD
         players_with_open_slots: Dict[str, List[Dict[str, BasePlayer | List[str]]]],
+=======
+        players_with_open_slots: Dict[str, List[Dict[str, Union[BasePlayer, List[str]]]]],
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         optimal_lineup: Dict[str, RosterSlot],
     ):
         for pos, assigned_players_info in players_with_open_slots.items():

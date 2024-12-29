@@ -2,7 +2,11 @@ import json
 import sys
 from pathlib import Path
 from time import sleep
+<<<<<<< HEAD
 from typing import Dict, List, Optional
+=======
+from typing import Dict, List, Optional, Union
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 from uuid import uuid4
 
 from colorama import Fore, Style
@@ -15,7 +19,10 @@ from ffmwr.utilities.settings import AppSettings, get_app_settings_from_env_file
 logger = get_logger(__name__, propagate=False)
 
 
+<<<<<<< HEAD
 # noinspection PyTypeChecker
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 class GroupMeIntegration(BaseIntegration):
     def __init__(self, settings: AppSettings, root_directory: Path, week: int):
         super().__init__(settings, root_directory, "groupme", week)
@@ -132,7 +139,11 @@ class GroupMeIntegration(BaseIntegration):
             json={"message": post_content},
         ).json()
 
+<<<<<<< HEAD
     def post_message(self, message: str) -> int | Dict:
+=======
+    def post_message(self, message: str) -> Union[int, Dict]:
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         logger.debug(f"Posting message to GroupMe: \n{message}")
 
         if self.settings.integration_settings.groupme_bot_or_user == "bot":
@@ -147,7 +158,11 @@ class GroupMeIntegration(BaseIntegration):
             )
             sys.exit(1)
 
+<<<<<<< HEAD
     def upload_file(self, file_path: Path) -> int | Dict:
+=======
+    def upload_file(self, file_path: Path) -> Union[int, Dict]:
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         logger.debug(f"Uploading file to GroupMe: \n{file_path}")
 
         message = self._upload_success_message(file_path.name)

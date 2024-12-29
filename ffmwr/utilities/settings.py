@@ -337,26 +337,6 @@ class AppSettings(CustomSettings):
         extra="ignore",  # allow, forbid, or ignore
     )
 
-    ffmwr_version_major: int = Field(
-        title=__qualname__,
-        description="Fantasy Football Metrics Weekly Report major version",
-
-    )
-    ffmwr_version_minor: int = Field(
-        title=__qualname__,
-        description="Fantasy Football Metrics Weekly Report minor version",
-
-    )
-    ffmwr_version_patch: int = Field(
-        title=__qualname__,
-        description="Fantasy Football Metrics Weekly Report patch version",
-
-    )
-    @computed_field
-    @property
-    def ffmwr_version(self) -> str:
-        return f"v{self.ffmwr_version_major}.{self.ffmwr_version_minor}.{self.ffmwr_version_patch}"
-
     log_level: str = Field(
         "info", title=__qualname__, description="logger output level: notset, debug, info, warning, error, critical"
     )
@@ -464,7 +444,10 @@ def get_app_settings_from_env_file(env_file_path: Path) -> AppSettings:
 
             logger.debug('The ".env" file is available. Running Fantasy Football Metrics Weekly Report app...')
 
+<<<<<<< HEAD
             # noinspection PyArgumentList
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
             return AppSettings(_env_file=env_file_path, _env_file_encoding="utf-8")
         else:
             logger.error('Unable to access ".env" file. Please check that file permissions are properly set.')
@@ -497,7 +480,10 @@ def create_env_file_from_settings(
 ) -> AppSettings:
     logger.debug('Creating ".env" file from settings.')
 
+<<<<<<< HEAD
     # noinspection PyArgumentList
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     app_settings = AppSettings(_env_file=env_file_path, _env_file_encoding="utf-8")
     app_settings.replace_field_values_with_default()
 

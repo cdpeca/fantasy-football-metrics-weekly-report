@@ -17,7 +17,10 @@ from colorama import Fore, Style
 from git import Repo, TagReference, cmd
 from urllib3 import connectionpool, poolmanager
 
+<<<<<<< HEAD
 from ffmwr.calculate.coaching_efficiency import CoachingEfficiency
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 from ffmwr.calculate.metrics import CalculateMetrics
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.dao.platforms.cbs import CBSPlatform
@@ -29,15 +32,41 @@ from ffmwr.features.bad_boy import BadBoyFeature
 from ffmwr.features.beef import BeefFeature
 from ffmwr.features.high_roller import HighRollerFeature
 from ffmwr.models.base.model import BaseLeague, BasePlayer, BaseTeam
+<<<<<<< HEAD
 from ffmwr.utilities.constants import nfl_team_names_to_abbreviations, prohibited_statuses
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings, get_app_settings_from_env_file
 from ffmwr.utilities.utils import format_platform_display, generate_normalized_player_key, get_data_from_web
+=======
+from ffmwr.utilities.constants import prohibited_statuses
+from ffmwr.utilities.logger import get_logger
+from ffmwr.utilities.settings import AppSettings, get_app_settings_from_env_file
+from ffmwr.utilities.utils import format_platform_display, get_data_from_web, normalize_player_name
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
 logger = get_logger(__name__, propagate=False)
 
 colorama.init()
 
+<<<<<<< HEAD
+=======
+
+class InjuryReportPlayer(object):
+    def __init__(
+        self, full_name: str, href: str, game_status: str, game_status_date_str: str, season: int, player_data_dir: Path
+    ):
+        self.full_name: str = full_name
+        self.full_name_normalized: str = normalize_player_name(full_name)
+        self.full_name_key: str = normalize_player_name(full_name, as_key_format=True)
+
+        self.url: str = f"https://www.footballdb.com{href}/gamelogs/{season}"
+
+        self.game_status: str = game_status
+        self.game_status_date: datetime = datetime.strptime(f"{game_status_date_str}/{season}", "%m/%d/%Y")
+
+        self.player_data_file_path: Path = player_data_dir / f"{self.full_name_key}.html"
+
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
 def user_week_input_validation(settings: AppSettings, week: int, retrieved_current_week: int, season: int) -> int:
     # user input validation
@@ -126,7 +155,11 @@ def platform_data_factory(
     root_dir: Path,
     data_dir: Path,
     platform: str,
+<<<<<<< HEAD
     game_id: str | int,
+=======
+    game_id: Union[str, int],
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     league_id: str,
     season: int,
     start_week: int,
@@ -452,6 +485,7 @@ def get_inactive_players(week: int, league: BaseLeague) -> List[str]:
     injury_report_players_to_check: Dict[str, InjuryReportPlayer] = {}
     injured_players_html = html_soup.find_all("div", {"class": ["teamsectlabel", "tr"]})
     for player in injured_players_html:
+<<<<<<< HEAD
         if "teamsectlabel" in player["class"]:
             player_team_abbr = nfl_team_names_to_abbreviations[player.find("b").text.strip()]
         else:
@@ -484,6 +518,31 @@ def get_inactive_players(week: int, league: BaseLeague) -> List[str]:
                     injured_players[injury_report_player.url] = injury_report_player
                 else:
                     injury_report_players_to_check[injury_report_player.url] = injury_report_player
+=======
+        player_info = player.find("a")
+        player_game_status = player.find("div", {"class": "td w20 hidden-xs"}).find("b")  # bolded text with game status
+
+        if player_game_status:
+            player_game_status_date_str = re.search(
+                r"(?<=\()(.+/.+)(?=\))",  # match strings with a forward slash between parentheses
+                player.find("div", {"class": "td w20 hidden-xs"}).text,  # text with game status, date, and opponent
+            ).group(0)
+
+            injury_report_player = InjuryReportPlayer(
+                full_name=player_info.text.strip(),
+                href=player_info.get("href"),
+                game_status=player_game_status,
+                game_status_date_str=player_game_status_date_str,
+                season=league.season,
+                player_data_dir=player_data_dir,
+            )
+
+            injury_report_player.game_status = player_game_status.text.strip()
+            if injury_report_player.game_status == "Out":
+                injured_players[injury_report_player.url] = injury_report_player
+            else:
+                injury_report_players_to_check[injury_report_player.url] = injury_report_player
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
     if not league.offline:
         player_pages = get_data_from_web(
@@ -768,7 +827,11 @@ if __name__ == "__main__":
         local_settings.platform.lower(),
         local_settings.league_id,
         local_settings.season,
+<<<<<<< HEAD
         local_settings.current_nfl_week,
+=======
+        local_settings.week_for_report,
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         local_root_directory,
         local_root_directory / "output" / "data",
         True,

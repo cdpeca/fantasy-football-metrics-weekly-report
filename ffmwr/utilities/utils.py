@@ -77,10 +77,15 @@ def truncate_cell_for_display(
         return cell_text
 
 
+<<<<<<< HEAD
 def generate_normalized_player_key(player_full_name: str, player_nfl_team_abbr: str) -> str:
     """Remove all punctuation and name suffixes from player names, combine whitespace, covert them to snake case, and
     append player NFL team abbreviation.
     """
+=======
+def normalize_player_name(player_full_name: str, as_key_format: bool = False) -> str:
+    """Remove all punctuation and name suffixes from player names, combine whitespace, and covert them to title case."""
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     regex_all_whitespace = re.compile(r"\s+")
     normalized_player_name: str = regex_all_whitespace.sub(" ", player_full_name).strip()
 
@@ -104,7 +109,11 @@ def get_data_from_web(
     headers: Dict[str, str],
     return_responses_as_body_strings: bool = False,
     request_bodies: Optional[Dict[str, str]] = None,
+<<<<<<< HEAD
 ) -> Dict[str, HTTPResponse | str]:
+=======
+) -> Dict[str, Union[HTTPResponse, str]]:
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     """Asynchronously download the HTML contents of a list of URLs.
 
     Args:

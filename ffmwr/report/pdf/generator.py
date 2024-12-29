@@ -9,7 +9,11 @@ import urllib.request
 from copy import deepcopy
 from pathlib import Path
 from random import choice
+<<<<<<< HEAD
 from typing import Any, Dict, List, Literal, Optional, Tuple
+=======
+from typing import Any, Dict, List, Literal, Optional, Tuple, Union
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 from urllib.error import URLError
 
 from PIL import Image, ImageFile
@@ -254,6 +258,7 @@ class PdfGenerator(object):
             0.85 * inch,  # Column 7
         ]  # 7.75 inches
 
+<<<<<<< HEAD
         # Team Luck Rankings Table - 7 Columns
         self.widths_07_cols_no_3 = [
             0.45 * inch,  # Place
@@ -265,6 +270,15 @@ class PdfGenerator(object):
             1.60 * inch   # Season Record (W-L) (Place)
         ]  # 7.75 inches total table width
 
+        self.widths_10_cols_no_1 = [
+            0.45 * inch,  # Place
+            1.80 * inch,  # Team
+            1.10 * inch,  # Manager
+            1.00 * inch,  # Record
+            0.80 * inch,  # Points For
+            1.05 * inch,  # Points Against
+            0.50 * inch,  # Streak
+=======
         self.widths_10_cols_no_1 = [
             0.45 * inch,  # Place
             1.80 * inch,  # Team
@@ -287,11 +301,40 @@ class PdfGenerator(object):
             0.80 * inch,  # Points For
             0.90 * inch,  # Points Against
             0.45 * inch,  # Streak
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
             0.50 * inch,  # Waiver
             0.50 * inch,  # Moves
             0.50 * inch,  # Trades
         ]  # 8.20 inches
 
+<<<<<<< HEAD
+        self.widths_11_cols_no_1 = [
+            0.40 * inch,  # Place
+            1.65 * inch,  # Team
+            0.80 * inch,  # Manager
+            0.85 * inch,  # Record
+            0.85 * inch,  # Division Record
+            0.80 * inch,  # Points For
+            0.90 * inch,  # Points Against
+            0.45 * inch,  # Streak
+            0.50 * inch,  # Waiver
+=======
+        self.widths_11_cols_no_2 = [
+            0.40 * inch,  # Place
+            1.65 * inch,  # Team
+            0.90 * inch,  # Manager
+            1.00 * inch,  # Record
+            0.80 * inch,  # Points For
+            1.05 * inch,  # Points Against
+            0.45 * inch,  # Streak
+            0.50 * inch,  # Waiver
+            0.45 * inch,  # FAAB
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+            0.50 * inch,  # Moves
+            0.50 * inch,  # Trades
+        ]  # 8.20 inches
+
+<<<<<<< HEAD
         self.widths_11_cols_no_2 = [
             0.40 * inch,  # Place
             1.65 * inch,  # Team
@@ -306,6 +349,8 @@ class PdfGenerator(object):
             0.50 * inch,  # Trades
         ]  # 8.20 inches
 
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         self.widths_12_cols_no_1 = [
             0.40 * inch,  # Place
             1.55 * inch,  # Team
@@ -809,10 +854,17 @@ class PdfGenerator(object):
         headers: List[List[str]],
         data: Any,
         table_style: TableStyle,
+<<<<<<< HEAD
         table_style_ties: Optional[TableStyle],
         col_widths: List[float],
         subtitle_text: Optional[str | List[str]] = None,
         subsubtitle_text: Optional[str | List[str]] = None,
+=======
+        table_style_ties: Union[TableStyle, None],
+        col_widths: List[float],
+        subtitle_text: Union[str, List[str]] = None,
+        subsubtitle_text: Union[str, List[str]] = None,
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         header_text: str = None,
         footer_text: str = None,
         row_heights: List[List[float]] = None,
@@ -1038,14 +1090,22 @@ class PdfGenerator(object):
 
         # elements.append(table_with_info)
 
+<<<<<<< HEAD
     def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
+=======
+    def get_tied_metric_footer(self, metric_type: str) -> Union[Paragraph, None]:
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         if metric_type in ["scores", "coaching_efficiency"]:
             if not self.break_ties:
                 return Paragraph(self.tie_for_first_footer, self.text_style_medium)
             else:
                 return None
         else:
+<<<<<<< HEAD
             return Paragraph(self.tie_for_first_footer, self.text_style_medium)
+=======
+            return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
     def create_title(
         self,
@@ -1053,8 +1113,13 @@ class PdfGenerator(object):
         title_width: float = 8.5,
         element_type: str = None,
         anchor: str = "",
+<<<<<<< HEAD
         subtitle_text: Optional[List | str] = None,
         subsubtitle_text: Optional[List | str] = None,
+=======
+        subtitle_text: Union[List, str] = None,
+        subsubtitle_text: Union[List, str] = None,
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     ) -> Table:
         if element_type == "document":
             title_text_style = self.text_style_h1
@@ -1730,6 +1795,7 @@ class PdfGenerator(object):
         # document title
         elements.append(self.report_title)
         elements.append(self.spacer_tenth_inch)
+<<<<<<< HEAD
         # ! Do not include author donation in header / table of contents page
         """
         donate_header_data = [[
@@ -1742,6 +1808,19 @@ class PdfGenerator(object):
         ]]
         """
         donate_header_data=[[Paragraph("")]]
+=======
+        donate_header_data = [
+            [
+                Paragraph(
+                    "Enjoying the app? Please consider donating to support its development:", self.text_style_italics
+                ),
+                self.get_img(
+                    "resources/images/donate.png",
+                    hyperlink="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VZZCNLRHH9BQS",
+                ),
+            ]
+        ]
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         elements.append(Table(donate_header_data, colWidths=[4.65 * inch, 1.00 * inch], style=self.header_style))
         elements.append(self.spacer_tenth_inch)
 
@@ -2029,6 +2108,7 @@ class PdfGenerator(object):
             luck_style_tied.add("FONTSIZE", (0, 0), (-1, -1), self.font_size - 4)
 
             # luck
+<<<<<<< HEAD
             elements.append(self.create_section(
                 "Team Luck Rankings",
                 "metrics",
@@ -2040,6 +2120,22 @@ class PdfGenerator(object):
                 tied_metric=self.report_data.ties_for_luck > 0,
                 metric_type="luck"
             ))
+=======
+            elements.append(
+                self.create_section(
+                    "Team Luck Rankings",
+                    "metrics",
+                    self.luck_headers,
+                    self.data_for_luck,
+                    self.style,
+                    self.style_tied_luck,
+                    # self.widths_5_cols_1,
+                    self.widths_06_cols_no_3,
+                    tied_metric=self.report_data.ties_for_luck > 0,
+                    metric_type="luck",
+                )
+            )
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
         if (
             self.settings.report_settings.league_score_rankings_bool

@@ -24,6 +24,11 @@ class StyledFormatter(logging.Formatter):
         logging.Formatter.__init__(self, msg)
 
     def format(self, record):
+<<<<<<< HEAD
+=======
+        record.name = f"{Fore.RESET}{record.name}{Style.RESET_ALL}"
+
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         log_level = record.levelname
         if log_level == "DEBUG":
             record.levelname = f"{Fore.MAGENTA}{log_level}{Style.RESET_ALL}"
@@ -145,7 +150,10 @@ def get_logger(
 
     log_level = log_level_mapping.get(os.environ.get("LOG_LEVEL", "info") or "info")
 
+<<<<<<< HEAD
     separator = f"{Fore.WHITE} - {Style.RESET_ALL}"
+=======
+>>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     log_formatter = StyledFormatter(
         f"{Fore.WHITE}%(asctime)s{Style.RESET_ALL}"
         f"{separator}"
