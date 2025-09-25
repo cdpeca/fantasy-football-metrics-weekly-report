@@ -4,7 +4,6 @@ __email__ = "uberfastman@uberfastman.dev"
 import logging
 from collections.abc import Callable
 from pathlib import Path
-
 # from collections import defaultdict
 # from concurrent.futures import ThreadPoolExecutor
 from statistics import median
@@ -15,12 +14,17 @@ from yfpy.models import League, Manager, Matchup, Player, RosterPosition, Team
 from yfpy.query import YahooFantasySportsQuery
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseLeague, BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
 =======
 from ffmwr.models.base.model import BaseLeague, BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
 from ffmwr.dao.platforms.base.platform import BasePlatform
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+from ffmwr.dao.platforms.base.platform import BasePlatform
+from ffmwr.models.base.model import BaseLeague, BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 
@@ -68,10 +72,14 @@ class YahooPlatform(BasePlatform):
         root_dir: Path,
         data_dir: Path,
 <<<<<<< HEAD
+<<<<<<< HEAD
         game_id: str | int,
 =======
         game_id: Union[str, int],
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        game_id: str | int,
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         league_id: str,
         season: int,
         start_week: int,

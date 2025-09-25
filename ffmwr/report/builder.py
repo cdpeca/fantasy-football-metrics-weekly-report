@@ -12,6 +12,7 @@ from ffmwr.calculate.metrics import CalculateMetrics
 from ffmwr.calculate.points_by_position import PointsByPosition
 from ffmwr.calculate.season_averages import SeasonAverageCalculator
 <<<<<<< HEAD
+<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseLeague, BaseTeam
 from ffmwr.report.data import ReportData
@@ -19,11 +20,18 @@ from ffmwr.report.pdf.generator import PdfGenerator
 from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
 =======
 from ffmwr.models.base.model import BaseLeague, BaseTeam
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.dao.platforms.base.platform import BasePlatform
+from ffmwr.models.base.model import BaseLeague, BaseTeam
 from ffmwr.report.data import ReportData
 from ffmwr.report.pdf.generator import PdfGenerator
+<<<<<<< HEAD
 from ffmwr.utilities.app import platform_data_factory, patch_http_connection_pool
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 from ffmwr.utilities.utils import format_platform_display

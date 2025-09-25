@@ -94,7 +94,11 @@
 
         The above image will be pulled automatically from the [GitHub Container Registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) if it has not already been built locally.
 
+<<<<<<< HEAD
 14. Update `fantasy-football-metrics-weekly-report` GitHub repository:
+=======
+13. Update `fantasy-football-metrics-weekly-report` GitHub repository:
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
     * *(Optional)* If creating a release:    
         ```shell
@@ -106,6 +110,12 @@
         git push
         ```
 
+<<<<<<< HEAD
 15. Open a pull request (PR) with the `release/vX.X.X` branch, allow GitHub actions to complete successfully, draft release notes, and merge it.
 
 16. Go to the [FFMWR Releases page](https://github.com/uberfastman/fantasy-football-metrics-weekly-report/releases) and draft a new release using the above git tag.
+=======
+14. Open a pull request (PR) with the `release/vX.X.X` branch, allow GitHub actions to complete successfully, draft release notes, and merge it.
+
+15. Go to the [FFMWR Releases page](https://github.com/uberfastman/fantasy-football-metrics-weekly-report/releases) and draft a new release using the above git tag.
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)

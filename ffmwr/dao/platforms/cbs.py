@@ -9,12 +9,17 @@ import requests
 from colorama import Fore, Style
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
 =======
 from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
 from ffmwr.dao.platforms.base.platform import BasePlatform
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+from ffmwr.dao.platforms.base.platform import BasePlatform
+from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings, get_app_settings_from_env_file
 

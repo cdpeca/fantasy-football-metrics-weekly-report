@@ -10,10 +10,14 @@ from copy import deepcopy
 from pathlib import Path
 from random import choice
 <<<<<<< HEAD
+<<<<<<< HEAD
 from typing import Any, Dict, List, Literal, Optional, Tuple
 =======
 from typing import Any, Dict, List, Literal, Optional, Tuple, Union
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+from typing import Any, Dict, List, Literal, Optional, Tuple
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from urllib.error import URLError
 
 from PIL import Image, ImageFile
@@ -855,6 +859,7 @@ class PdfGenerator(object):
         data: Any,
         table_style: TableStyle,
 <<<<<<< HEAD
+<<<<<<< HEAD
         table_style_ties: Optional[TableStyle],
         col_widths: List[float],
         subtitle_text: Optional[str | List[str]] = None,
@@ -865,6 +870,12 @@ class PdfGenerator(object):
         subtitle_text: Union[str, List[str]] = None,
         subsubtitle_text: Union[str, List[str]] = None,
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        table_style_ties: Optional[TableStyle],
+        col_widths: List[float],
+        subtitle_text: Optional[str | List[str]] = None,
+        subsubtitle_text: Optional[str | List[str]] = None,
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         header_text: str = None,
         footer_text: str = None,
         row_heights: List[List[float]] = None,
@@ -1091,10 +1102,14 @@ class PdfGenerator(object):
         # elements.append(table_with_info)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
 =======
     def get_tied_metric_footer(self, metric_type: str) -> Union[Paragraph, None]:
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+    def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         if metric_type in ["scores", "coaching_efficiency"]:
             if not self.break_ties:
                 return Paragraph(self.tie_for_first_footer, self.text_style_medium)
@@ -1114,12 +1129,17 @@ class PdfGenerator(object):
         element_type: str = None,
         anchor: str = "",
 <<<<<<< HEAD
+<<<<<<< HEAD
         subtitle_text: Optional[List | str] = None,
         subsubtitle_text: Optional[List | str] = None,
 =======
         subtitle_text: Union[List, str] = None,
         subsubtitle_text: Union[List, str] = None,
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        subtitle_text: Optional[List | str] = None,
+        subsubtitle_text: Optional[List | str] = None,
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     ) -> Table:
         if element_type == "document":
             title_text_style = self.text_style_h1

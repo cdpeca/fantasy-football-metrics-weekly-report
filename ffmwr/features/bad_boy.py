@@ -108,15 +108,22 @@ class BadBoyFeature(BaseFeature):
             week_for_report,
             data_dir,
 <<<<<<< HEAD
+<<<<<<< HEAD
             True,  # TODO: figure out how to include only ACTIVE players in team D/ST roll-ups
 =======
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+            True,  # TODO: figure out how to include only ACTIVE players in team D/ST roll-ups
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
             refresh,
             save_data,
             offline,
         )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     def _get_ajax_nonce(self):
         logger.debug(f"Retrieving AJAX nonce for {self.feature_type_title} feature.")
 
@@ -125,12 +132,16 @@ class BadBoyFeature(BaseFeature):
         cdata = re.search("var sitedata = (.*);", soup.find(string=re.compile("CDATA"))).group(1)
         return json.loads(cdata)["ajax_nonce"]
 
+<<<<<<< HEAD
 =======
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     # noinspection DuplicatedCode
     def _get_feature_data(self) -> None:
         logger.debug("Retrieving bad boy feature data from the web.")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         ajax_nonce = self._get_ajax_nonce()
 =======
@@ -139,6 +150,9 @@ class BadBoyFeature(BaseFeature):
         cdata = re.search("var sitedata = (.*);", soup.find(string=re.compile("CDATA"))).group(1)
         ajax_nonce = json.loads(cdata)["ajax_nonce"]
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        ajax_nonce = self._get_ajax_nonce()
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
         usa_today_nfl_arrest_url = "https://databases.usatoday.com/wp-admin/admin-ajax.php"
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
@@ -157,10 +171,14 @@ class BadBoyFeature(BaseFeature):
         """
         arrests = []
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         for ndx, team in enumerate(nfl_team_abbreviations):
             # the usatoday arrests data uses JAC to abbreviate Jacksonville Jaguars
             if team == "JAX":
                 team = "JAC"
+<<<<<<< HEAD
 
             logger.debug(f"Retrieving bad boy feature data for NFL team: {team}.")
 
@@ -265,9 +283,12 @@ class BadBoyFeature(BaseFeature):
                 f"&page={page_num}"
                 f'&searches={{"Team":"{team}"}}'
             )
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
-            res_json = requests.post(usa_today_nfl_arrest_url, data=body, headers=headers).json()
+            logger.debug(f"Retrieving bad boy feature data for NFL team: {team}.")
 
+<<<<<<< HEAD
             arrests_data = res_json["data"]["Result"]
 
             for arrest in arrests_data:
@@ -287,32 +308,51 @@ class BadBoyFeature(BaseFeature):
                         "description": arrest["Description"],
                         "outcome": arrest["Outcome"],
                     }
+=======
+            try:
+                page_num = 1
+                body = (
+                    f"action=cspFetchTable"
+                    f"&security={ajax_nonce}"
+                    f"&pageID=10"
+                    f"&sortBy=Date"
+                    f"&sortOrder=desc"
+                    f"&page={page_num}"
+                    f'&searches={{"Team":"{team}"}}'
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
                 )
 
-            total_results = res_json["data"]["totalResults"]
+                res_json = requests.post(usa_today_nfl_arrest_url, data=body, headers=headers).json()
 
-            # the USA Today NFL arrests database only retrieves 20 entries per request
-            if total_results > 20:
-                # add extra page to include last page of results if they exist
-                num_pages = (total_results // 20) + (1 if total_results % 20 > 0 else 0)
+                arrests_data = res_json["data"]["Result"]
 
-                for page in range(2, num_pages + 1):
-                    page_num += 1
-                    body = (
-                        f"action=cspFetchTable"
-                        f"&security={ajax_nonce}"
-                        f"&pageID=10"
-                        f"&sortBy=Date"
-                        f"&sortOrder=desc"
-                        f"&page={page_num}"
-                        f'&searches={{"Team":"{team}"}}'
+                for arrest in arrests_data:
+                    arrests.append(
+                        {
+                            "full_name": f"{arrest['First_name']} {arrest['Last_name']}",
+                            "team_abbr": (
+                                "FA"
+                                if (arrest["Team"] == "Free agent" or arrest["Team"] == "Free Agent")
+                                else arrest["Team"]
+                            ),
+                            "date": arrest["Date"],
+                            "position": arrest["Position"],
+                            "position_type": self.position_types[arrest["Position"]],
+                            "case": arrest["Case_1"].upper(),
+                            "crime": arrest["Category"].upper(),
+                            "description": arrest["Description"],
+                            "outcome": arrest["Outcome"],
+                        }
                     )
 
-                    r = requests.post(usa_today_nfl_arrest_url, data=body, headers=headers)
-                    resp_json = r.json()
+                total_results = res_json["data"]["totalResults"]
 
-                    arrests_data = resp_json["data"]["Result"]
+                # the USA Today NFL arrests database only retrieves 20 entries per request
+                if total_results > 20:
+                    # add extra page to include last page of results if they exist
+                    num_pages = (total_results // 20) + (1 if total_results % 20 > 0 else 0)
 
+<<<<<<< HEAD
                     for arrest in arrests_data:
                         arrests.append(
                             {
@@ -330,7 +370,51 @@ class BadBoyFeature(BaseFeature):
                                 "description": arrest["Description"],
                                 "outcome": arrest["Outcome"],
                             }
+=======
+                    for page in range(2, num_pages + 1):
+                        page_num += 1
+                        body = (
+                            f"action=cspFetchTable"
+                            f"&security={ajax_nonce}"
+                            f"&pageID=10"
+                            f"&sortBy=Date"
+                            f"&sortOrder=desc"
+                            f"&page={page_num}"
+                            f'&searches={{"Team":"{team}"}}'
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
                         )
+
+                        r = requests.post(usa_today_nfl_arrest_url, data=body, headers=headers)
+                        resp_json = r.json()
+
+                        arrests_data = resp_json["data"]["Result"]
+
+                        for arrest in arrests_data:
+                            arrests.append(
+                                {
+                                    "full_name": f"{arrest['First_name']} {arrest['Last_name']}",
+                                    "team_abbr": (
+                                        "FA"
+                                        if (arrest["Team"] == "Free agent" or arrest["Team"] == "Free Agent")
+                                        else arrest["Team"]
+                                    ),
+                                    "date": arrest["Date"],
+                                    "position": arrest["Position"],
+                                    "position_type": self.position_types[arrest["Position"]],
+                                    "case": arrest["Case_1"].upper(),
+                                    "crime": arrest["Category"].upper(),
+                                    "description": arrest["Description"],
+                                    "outcome": arrest["Outcome"],
+                                }
+                            )
+
+            except ConnectTimeout as e:
+                logger.debug(f"Connection timed out for {self.feature_type_title} feature: {e}")
+                logger.debug(f"Refreshing AJAX nonce and trying again for NFL team {team}.")
+                # refresh the AJAX nonce
+                ajax_nonce = self._get_ajax_nonce()
+                # insert the team for which the AJAX queries timed out back into the list before the next loop
+                nfl_team_abbreviations.insert(ndx + 1, team)
 
         arrests_by_team = {
             key: list(group)

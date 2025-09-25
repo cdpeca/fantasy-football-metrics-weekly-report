@@ -39,7 +39,11 @@ test_check: check test_code ## Run all code checks and tests.
 	echo "Code checked and tested."
 
 pre_deploy: ## Set project version in pyproject.toml using latest git tag and update Docker Compose files with project and Python versions
+<<<<<<< HEAD
 	python scripts/pre_deploy.py && uv lock
+=======
+	python scripts/pre_deploy.py
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
 git_post_deploy:  ## Update git by adding changed files, committing with a message about updating documentation and version number, and pushing
 	git add . && git commit -m 'updated version number and documentation' && git push

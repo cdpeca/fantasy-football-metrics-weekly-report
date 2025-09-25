@@ -156,10 +156,14 @@ def platform_data_factory(
     data_dir: Path,
     platform: str,
 <<<<<<< HEAD
+<<<<<<< HEAD
     game_id: str | int,
 =======
     game_id: Union[str, int],
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+    game_id: str | int,
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     league_id: str,
     season: int,
     start_week: int,

@@ -110,10 +110,14 @@ def get_data_from_web(
     return_responses_as_body_strings: bool = False,
     request_bodies: Optional[Dict[str, str]] = None,
 <<<<<<< HEAD
+<<<<<<< HEAD
 ) -> Dict[str, HTTPResponse | str]:
 =======
 ) -> Dict[str, Union[HTTPResponse, str]]:
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+) -> Dict[str, HTTPResponse | str]:
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     """Asynchronously download the HTML contents of a list of URLs.
 
     Args:

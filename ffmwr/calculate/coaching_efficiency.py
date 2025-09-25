@@ -114,10 +114,14 @@ class CoachingEfficiency(object):
     def _create_open_slot_if_possible(
         unassigned_player: BasePlayer,
 <<<<<<< HEAD
+<<<<<<< HEAD
         players_with_open_slots: Dict[str, List[Dict[str, BasePlayer | List[str]]]],
 =======
         players_with_open_slots: Dict[str, List[Dict[str, Union[BasePlayer, List[str]]]]],
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        players_with_open_slots: Dict[str, List[Dict[str, BasePlayer | List[str]]]],
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         optimal_lineup: Dict[str, RosterSlot],
     ):
         for pos, assigned_players_info in players_with_open_slots.items():

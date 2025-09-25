@@ -17,10 +17,14 @@ logger = get_logger(__name__, propagate=False)
 class CalculateMetrics(object):
     def __init__(
 <<<<<<< HEAD
+<<<<<<< HEAD
         self, league_id: Optional[str], playoff_slots: int | None, playoff_simulations: int | None
 =======
         self, league_id: Union[str, None], playoff_slots: Union[int, None], playoff_simulations: Union[int, None]
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+        self, league_id: Optional[str], playoff_slots: int | None, playoff_simulations: int | None
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     ):
         logger.debug("Initializing metrics calculator.")
 
@@ -284,7 +288,7 @@ class CalculateMetrics(object):
             else:
                 team_playoff_probs_data[prob_ndx + 1] = f"{int(float(team_playoff_probs_data[prob_ndx + 1]))} wins"
             ndx = prob_ndx + 2
-            for stat in team_playoff_probs_data[prob_ndx + 2 :]:
+            for stat in team_playoff_probs_data[prob_ndx + 2:]:
                 team_playoff_probs_data[ndx] = f"{stat:.2f}%"
                 ndx += 1
 
@@ -900,9 +904,13 @@ class CalculateMetrics(object):
 
         for team_rankings in power_ranked_teams.values():
 <<<<<<< HEAD
+<<<<<<< HEAD
             # noinspection PyTypeChecker
 =======
 >>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
+=======
+            # noinspection PyTypeChecker
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
             team_rankings["power_ranking"] = (
                 team_rankings["score_ranking"]
                 + team_rankings["coaching_efficiency_ranking"]

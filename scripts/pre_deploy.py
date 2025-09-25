@@ -1,5 +1,8 @@
 from pathlib import Path
+<<<<<<< HEAD
 from re import findall
+=======
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from subprocess import CalledProcessError, DEVNULL, check_output
 from typing import Optional
 
@@ -33,11 +36,17 @@ def get_project_and_python_versions() -> tuple[Version, Version]:
 
     project_version = Version.parse(pyproject_toml_document["project"]["version"])
     python_version = sorted([
+<<<<<<< HEAD
         Version.parse(py_ver, optional_minor_and_patch=True)
         for py_ver in findall(r"[\d.]+", pyproject_toml_document["project"]["requires-python"])
     ])[-1]
     # reduce minor version by one to handle exclusive Python version constraint
     python_version._minor = python_version.minor - 1
+=======
+        Version.parse(py_ver[2:], optional_minor_and_patch=True)
+        for py_ver in pyproject_toml_document["project"]["requires-python"].split(",")
+    ])[-1]
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
     return project_version, python_version
 
@@ -84,7 +93,11 @@ if docker_compose_yaml_file.exists():
     project_sem_version = git_tag_version if git_tag_version else project_semantic_version
     print(
         f"Updating \"compose.yaml\" with project version from "
+<<<<<<< HEAD
         f"{'git tag' if git_tag_version else 'pyproject.toml'} to v{project_sem_version}..."
+=======
+        f"{'git tag' if git_tag_version else 'pyproject.toml'} to v{project_semantic_version}..."
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     )
 
     yaml = YAML(typ="rt")
@@ -92,7 +105,11 @@ if docker_compose_yaml_file.exists():
     docker_compose_yaml = yaml.load(docker_compose_yaml_file)
     docker_compose_yaml["services"]["app"]["image"] = (
         f"{docker_compose_yaml['services']['app']['image'].split(':')[0]}"
+<<<<<<< HEAD
         f":{str(project_sem_version).replace('v', '')}"
+=======
+        f":{str(project_semantic_version).replace('v', '')}"
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
     )
     docker_compose_yaml["services"]["app"].yaml_add_eol_comment(EDIT_MESSAGE, key="image")
 
@@ -112,9 +129,15 @@ if docker_compose_build_yaml_file.exists():
     for build_arg in docker_compose_build_yaml["services"]["app"]["build"]["args"]:
         build_arg_key, build_arg_value = build_arg.split("=")
         if build_arg_key == "PYTHON_VERSION_MAJOR":
+<<<<<<< HEAD
             build_arg_value = python_semantic_version.major
         elif build_arg_key == "PYTHON_VERSION_MINOR":
             build_arg_value = python_semantic_version.minor
+=======
+            build_arg_value = project_semantic_version.major
+        elif build_arg_key == "PYTHON_VERSION_MINOR":
+            build_arg_value = project_semantic_version.minor
+>>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         updated_build_args.append(f"{build_arg_key}={build_arg_value}")
     docker_compose_build_yaml["services"]["app"]["build"]["args"] = updated_build_args
 
