@@ -653,12 +653,15 @@ def check_github_for_updates(use_default: bool = False) -> bool:
         active_branch = project_repo.active_branch.name
         if active_branch != target_branch:
             if not use_default:
+                '''
                 switch_branch = input(
                     f"{Fore.YELLOW}You are {Fore.RED}not {Fore.YELLOW}on the deployment branch "
                     f'({Fore.GREEN}"{target_branch}"{Fore.YELLOW}) of the Fantasy Football Metrics Weekly Report '
                     f'app.\nDo you want to switch to the {Fore.GREEN}"{target_branch}"{Fore.YELLOW} branch? '
                     f"({Fore.GREEN}y{Fore.YELLOW}/{Fore.RED}n{Fore.YELLOW}) -> {Style.RESET_ALL}"
                 )
+                '''
+                switch_branch = "n" # Automatically set to "n" as intentionally running on non-main branch
 
                 if switch_branch == "y":
                     project_repo.git.checkout(target_branch)
