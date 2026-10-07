@@ -456,6 +456,11 @@ class PdfGenerator(object):
             name="italics", fontSize=10, alignment=TA_CENTER, fontName=self.font_italic
         )
         self.text_style_small = ParagraphStyle(name="small", fontSize=5, alignment=TA_CENTER)
+        self.text_style_medium = ParagraphStyle(
+            name="medium",
+            parent=self.text_style_normal,
+            fontSize=8
+        )
         self.text_style_invisible = ParagraphStyle(name="invisible", fontSize=0, textColor=colors.white)
 
         # set word wrap
@@ -596,7 +601,7 @@ class PdfGenerator(object):
         self.weekly_top_scorer_headers = [["Week", "Team", "Manager", "Score"]]
         self.weekly_low_scorer_headers = [["Week", "Team", "Manager", "Score"]]
         self.weekly_highest_ce_headers = [["Week", "Team", "Manager", "Coaching Efficiency (%)"]]
-        self.tie_for_first_footer = "<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Tie(s).</i>"
+        self.tie_for_first_footer = "<i>*Tie(s).</i>"
 
         # options: "document", "section", or None
         self.report_title = self.create_title(report_title_text, element_type="document")
@@ -1036,11 +1041,11 @@ class PdfGenerator(object):
     def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
         if metric_type in ["scores", "coaching_efficiency"]:
             if not self.break_ties:
-                return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+                return Paragraph(self.tie_for_first_footer, self.text_style_medium)
             else:
                 return None
         else:
-            return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+            return Paragraph(self.tie_for_first_footer, self.text_style_medium)
 
     def create_title(
         self,
@@ -1118,7 +1123,7 @@ class PdfGenerator(object):
 
         # reduce manager string max characters for standings metric to accommodate narrower column widths
         manager_header_ndx = None
-        if metric_type == "standings" or metric_type == "playoffs":
+        if metric_type == "standings":
             for header_ndx, header in enumerate(col_headers[0]):
                 if header == "Manager":
                     manager_header_ndx = header_ndx
