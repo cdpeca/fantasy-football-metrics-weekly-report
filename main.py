@@ -420,7 +420,7 @@ def main() -> None:
 
     if app_settings.check_for_updates:
         # check to see if the current app is behind any commits, and provide option to update and re-run if behind
-        check_github_for_updates(args.use_default)
+        check_github_for_updates(args.use_default, app_settings.prompt_to_switch_branch_bool)
 
     f_str_newline = "\n"
     args_display = f"{f_str_newline}".join(

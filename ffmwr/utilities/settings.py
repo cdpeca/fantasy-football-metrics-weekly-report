@@ -340,6 +340,9 @@ class AppSettings(CustomSettings):
     log_level: str = Field(
         "info", title=__qualname__, description="logger output level: notset, debug, info, warning, error, critical"
     )
+    prompt_to_switch_branch_bool: bool = Field(
+        True, title=__qualname__, description="offer deployment branch switching during interactive update checks"
+    )
     check_for_updates: bool = Field(
         True,
         title=__qualname__,

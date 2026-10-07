@@ -596,7 +596,7 @@ def git_ls_remote(url: str):
     return remote_refs
 
 
-def check_github_for_updates(use_default: bool = False) -> bool:
+def check_github_for_updates(use_default: bool = False, prompt_to_switch_branch: bool = True) -> bool:
     if not active_network_connection():
         logger.info(
             "No active network connection found. Unable to check for updates for the Fantasy Football Metrics Weekly "
@@ -652,7 +652,9 @@ def check_github_for_updates(use_default: bool = False) -> bool:
         target_branch = "main"
         active_branch = project_repo.active_branch.name
         if active_branch != target_branch:
-            if not use_default:
+            if not use_default and not prompt_to_switch_branch:
+                logger.info("Keeping selected branch; deployment branch switch prompt is disabled.")
+            elif not use_default:
                 switch_branch = input(
                     f"{Fore.YELLOW}You are {Fore.RED}not {Fore.YELLOW}on the deployment branch "
                     f'({Fore.GREEN}"{target_branch}"{Fore.YELLOW}) of the Fantasy Football Metrics Weekly Report '
@@ -670,7 +672,7 @@ def check_github_for_updates(use_default: bool = False) -> bool:
                 else:
                     logger.warning('You must select either "y" or "n".')
                     project_repo.remote(name="origin").set_url(origin_url)
-                    return check_github_for_updates(use_default)
+                    return check_github_for_updates(use_default, prompt_to_switch_branch)
             else:
                 logger.info('Use-default is set to "true". Automatically switching to deployment branch "main".')
                 project_repo.git.checkout(target_branch)
@@ -725,7 +727,7 @@ def check_github_for_updates(use_default: bool = False) -> bool:
             else:
                 logger.warning('Please only select "y" or "n".')
                 time.sleep(0.25)
-                return check_github_for_updates()
+                return check_github_for_updates(use_default, prompt_to_switch_branch)
         else:
             logger.info(
                 f"The Fantasy Football Metrics Weekly Report app is {Fore.GREEN}up to date{Fore.WHITE} and running "
