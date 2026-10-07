@@ -195,6 +195,7 @@ class PlatformSettings(CustomSettings):
 
 
 class ReportSettings(CustomSettings):
+    show_donations_bool: bool = Field(True, title=__qualname__, description="show donation prompts and images in reports")
     league_standings_bool: bool = Field(True, title=__qualname__)
     league_playoff_probs_bool: bool = Field(True, title=__qualname__)
     league_median_standings_bool: bool = Field(True, title=__qualname__)

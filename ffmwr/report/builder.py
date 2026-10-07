@@ -379,13 +379,14 @@ class FantasyFootballReport(object):
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
-            f'Fantasy Football league "{self.league.name}" with id {self.league_id} '
-            f'(<a href="{self.league.url}" color=blue><u>{self.league.url}</u></a>).'
-            f"<br></br><br></br><br></br>"
-            f"If you enjoy using the Fantasy Football Metrics Weekly Report app, please feel free help support its "
-            f"development below:"
-            f"</para>"
+            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
+            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
         )
+        if self.settings.report_settings.show_donations_bool:
+            report_footer_text += (
+                "<br></br><br></br>Enjoying the app? Please consider donating to support its development below:"
+            )
+        report_footer_text += "</para>"
 
         if not Path(report_save_dir).is_dir():
             os.makedirs(report_save_dir)
