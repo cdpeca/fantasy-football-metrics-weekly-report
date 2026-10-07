@@ -14,18 +14,16 @@ on:
             - develop
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                python-version: ['3.11', '3.12', '3.13']
 
         steps:
             - uses: actions/checkout@v4
 
-<<<<<<< HEAD
             - name: Install uv and set the python version to ${{ matrix.python-version }}
               uses: astral-sh/setup-uv@v6
               with:
@@ -51,32 +49,3 @@ jobs:
               run: |
                   source .venv/bin/activate
                   make test_code
-=======
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv and set the python version to ${{ matrix.python-version }}
-        uses: astral-sh/setup-uv@v6
-        with:
-          version: "0.8.17"
-          enable-cache: true
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies (including development dependencies)
-        run: |
-          uv sync --locked --all-extras --dev
-
-      - name: Lint with ruff
-        run: |
-          source .venv/bin/activate
-          make lint
-
-      - name: Security check with bandit
-        run: |
-          source .venv/bin/activate
-          make secure
-
-      - name: Run tests with pytest
-        run: |
-          source .venv/bin/activate
-          make test_code
