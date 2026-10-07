@@ -297,12 +297,35 @@ class FantasyFootballReport(object):
             time_series_luck_data, "data_for_luck", with_percent=True
         )
 
-        # add weekly record to luck data
-        for team_luck_data_entry in report_data.data_for_luck:
-            for team in self.league.teams_by_week[str(self.league.week_for_report)].values():
-                team: BaseTeam
-                if team_luck_data_entry[1] == team.name:
-                    team_luck_data_entry.append(team.weekly_overall_record.get_record_str())
+        # Season all-play records are accumulated by stable team ID, not team name.
+        season_records = {}
+        for week in range(1, self.league.week_for_report + 1):
+            for team in self.league.teams_by_week[str(week)].values():
+                totals = season_records.setdefault(str(team.team_id), [0, 0, 0])
+                record = team.weekly_overall_record
+                totals[0] += record.get_wins()
+                totals[1] += record.get_losses()
+                totals[2] += record.get_ties()
+
+        # Rank by wins plus half a win per tie. Equal scores share competition rank.
+        scores = {team_id: wins * 2 + ties for team_id, (wins, losses, ties) in season_records.items()}
+        ordered_scores = sorted(scores.values(), reverse=True)
+        ranks = {team_id: ordered_scores.index(score) + 1 for team_id, score in scores.items()}
+        current_teams = list(self.league.teams_by_week[str(self.league.week_for_report)].values())
+        teams_by_name = {team.name: team for team in current_teams}
+        if len(teams_by_name) != len(current_teams):
+            raise ValueError("Luck report requires unique current team names to match report rows.")
+        for row in report_data.data_for_luck:
+            team = teams_by_name[row[1]]
+            team_id = str(team.team_id)
+            wins, losses, ties = season_records[team_id]
+            record_text = f"{wins}-{losses}" + (f"-{ties}" if ties else "")
+            rank = ranks[team_id]
+            tied = ordered_scores.count(scores[team_id]) > 1
+            row.extend([
+                team.weekly_overall_record.get_record_str(),
+                f"{record_text} ({rank}{'*' if tied else ''})",
+            ])
 
         # add season total optimal points to optimal points data
         sorted_season_total_optimal_points_data = dict(

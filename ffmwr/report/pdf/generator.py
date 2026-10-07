@@ -254,6 +254,17 @@ class PdfGenerator(object):
             0.85 * inch,  # Column 7
         ]  # 7.75 inches
 
+        # Team Luck Rankings Table - 7 Columns
+        self.widths_07_cols_no_3 = [
+            0.45 * inch,  # Place
+            1.40 * inch,  # Team
+            1.10 * inch,  # Manager
+            0.70 * inch,  # Week Luck
+            1.30 * inch,  # Season Luck (Place)
+            1.20 * inch,  # Week Record (W-L)
+            1.60 * inch   # Season Record (W-L) (Place)
+        ]  # 7.75 inches total table width
+
         self.widths_10_cols_no_1 = [
             0.45 * inch,  # Place
             1.80 * inch,  # Team
@@ -569,7 +580,15 @@ class PdfGenerator(object):
         self.zscores_headers = [["Place", "Team", "Manager", "Z-Score"]]
         self.scores_headers = [["Place", "Team", "Manager", "Points", "Season Avg. (Place)"]]
         self.efficiency_headers = [["Place", "Team", "Manager", "Coaching Efficiency (%)", "Season Avg. (Place)"]]
-        self.luck_headers = [["Place", "Team", "Manager", "Luck", "Season Avg. (Place)", "Weekly Record (W-L)"]]
+        self.luck_headers = [[
+            "Place",
+            "Team",
+            "Manager",
+            "Week Luck",
+            "Season Avg. Luck (Place)",
+            "Week All-Play Record",
+            "Season All-Play Record (Place)"
+        ]]
         self.optimal_scores_headers = [["Place", "Team", "Manager", "Optimal Points", "Season Total (Place)"]]
         self.bad_boy_headers = [["Place", "Team", "Manager", "Bad Boy Pts", "Worst Offense", "# Offenders"]]
         self.beef_headers = [["Place", "Team", "Manager", "TABBU(s)"]]
@@ -1997,21 +2016,24 @@ class PdfGenerator(object):
             elements.append(self.spacer_twentieth_inch)
 
         if self.settings.report_settings.league_luck_rankings_bool:
+            # update luck styles to reduce font size
+            luck_style = deepcopy(self.style)
+            luck_style.add("FONTSIZE", (0, 0), (-1, -1), self.font_size - 4)
+            luck_style_tied = deepcopy(self.style_tied_luck)
+            luck_style_tied.add("FONTSIZE", (0, 0), (-1, -1), self.font_size - 4)
+
             # luck
-            elements.append(
-                self.create_section(
-                    "Team Luck Rankings",
-                    "metrics",
-                    self.luck_headers,
-                    self.data_for_luck,
-                    self.style,
-                    self.style_tied_luck,
-                    # self.widths_5_cols_1,
-                    self.widths_06_cols_no_3,
-                    tied_metric=self.report_data.ties_for_luck > 0,
-                    metric_type="luck",
-                )
-            )
+            elements.append(self.create_section(
+                "Team Luck Rankings",
+                "metrics",
+                self.luck_headers,
+                self.data_for_luck,
+                luck_style,
+                luck_style_tied,
+                self.widths_07_cols_no_3,
+                tied_metric=self.report_data.ties_for_luck > 0,
+                metric_type="luck"
+            ))
 
         if (
             self.settings.report_settings.league_score_rankings_bool
