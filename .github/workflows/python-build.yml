@@ -14,12 +14,13 @@ on:
             - develop
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                python-version: ['3.11', '3.12', '3.13']
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
 
         steps:
             - uses: actions/checkout@v4
@@ -79,4 +80,3 @@ jobs:
         run: |
           source .venv/bin/activate
           make test_code
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)

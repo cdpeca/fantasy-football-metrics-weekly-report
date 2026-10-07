@@ -565,3 +565,7 @@ def main() -> None:
 # RUN FANTASY FOOTBALL REPORT PROGRAM
 if __name__ == "__main__":
     main()
+
+# RUN FANTASY FOOTBALL REPORT PROGRAM
+if __name__ == "__main__":
+    main()

@@ -1041,11 +1041,11 @@ class PdfGenerator(object):
     def get_tied_metric_footer(self, metric_type: str) -> Optional[Paragraph]:
         if metric_type in ["scores", "coaching_efficiency"]:
             if not self.break_ties:
-                return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+                return Paragraph(self.tie_for_first_footer, self.text_style_medium)
             else:
                 return None
         else:
-            return Paragraph(self.tie_for_first_footer, self.text_style_normal)
+            return Paragraph(self.tie_for_first_footer, self.text_style_medium)
 
     def create_title(
         self,
@@ -1730,6 +1730,7 @@ class PdfGenerator(object):
         # document title
         elements.append(self.report_title)
         elements.append(self.spacer_tenth_inch)
+
         # ! Do not include author donation in header / table of contents page
         """
         donate_header_data = [[

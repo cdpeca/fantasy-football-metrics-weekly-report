@@ -5,7 +5,7 @@ import os
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 
 from ffmwr.calculate.coaching_efficiency import CoachingEfficiency
 from ffmwr.calculate.metrics import CalculateMetrics
@@ -324,15 +324,12 @@ class FantasyFootballReport(object):
                             time_series_luck[team.name] = {'name': team.name, 'wins': wins, 'losses': losses}
             week_counter += 1
 
-
-        # ============================================================
-        # Season Luck
-        # ============================================================
-
-
         # Calculate Season Luck Record and resolve ties
+
         sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
+
         team_index = 0
+
         for i in sorted_time_series_luck:
             team_index += 1
             if team_index == 1:
@@ -437,8 +434,8 @@ class FantasyFootballReport(object):
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
-            f'Fantasy Football league "{self.league.name}" with id {self.league_id} '
-            f'(<a href="{self.league.url}" color=blue><u>{self.league.url}</u></a>).'
+            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
+            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
             f"<br></br><br></br><br></br>"
             f"</para>"
         )
