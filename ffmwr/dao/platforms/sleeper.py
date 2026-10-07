@@ -11,14 +11,9 @@ from pathlib import Path
 from statistics import median
 from typing import Callable
 
-<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
 from ffmwr.utilities.constants import nfl_team_abbreviations_to_names
-=======
-from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
-from ffmwr.dao.platforms.base.platform import BasePlatform
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 
@@ -33,15 +28,7 @@ class SleeperPlatform(BasePlatform):
     def __init__(
         self,
         settings: AppSettings,
-<<<<<<< HEAD
-<<<<<<< HEAD
         root_dir: Path | None,
-=======
-        root_dir: Union[Path, None],
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-        root_dir: Path | None,
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         data_dir: Path,
         league_id: str,
         season: int,

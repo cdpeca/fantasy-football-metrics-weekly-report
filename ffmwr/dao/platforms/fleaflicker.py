@@ -12,18 +12,8 @@ from typing import Callable, Dict, Optional
 import requests
 from bs4 import BeautifulSoup
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
-=======
-from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
-from ffmwr.dao.platforms.base.platform import BasePlatform
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-from ffmwr.dao.platforms.base.platform import BasePlatform
-from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 
@@ -38,15 +28,7 @@ class FleaflickerPlatform(BasePlatform):
     def __init__(
         self,
         settings: AppSettings,
-<<<<<<< HEAD
-<<<<<<< HEAD
         root_dir: Optional[Path],
-=======
-        root_dir: Union[Path, None],
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-        root_dir: Optional[Path],
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         data_dir: Path,
         league_id: str,
         season: int,

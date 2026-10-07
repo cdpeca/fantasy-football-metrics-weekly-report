@@ -27,18 +27,8 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
-=======
-from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
-from ffmwr.dao.platforms.base.platform import BasePlatform
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-from ffmwr.dao.platforms.base.platform import BasePlatform
-from ffmwr.models.base.model import BaseManager, BaseMatchup, BasePlayer, BaseRecord, BaseStat, BaseTeam
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings, get_app_settings_from_env_file
 
@@ -131,19 +121,6 @@ class ESPNPlatform(BasePlatform):
                 )
                 self.settings.write_settings_to_env_file(self.root_dir / ".env")
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            if not self.settings.platform_settings.espn_chrome_user_profile_path:
-                self.settings.platform_settings.espn_chrome_user_profile_path = input(
-                    f'{Fore.GREEN}What is your Chrome user data profile path? (wrap your response in quotes ("") if '
-                    f"there are any spaces in it) -> {Style.RESET_ALL}"
-                )
-                self.settings.write_settings_to_env_file(self.root_dir / ".env")
-
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
             logger.info("Retrieving your ESPN session cookies using your configured ESPN credentials...")
 
             espn_session_cookies = self._retrieve_session_cookies()
@@ -221,18 +198,7 @@ class ESPNPlatform(BasePlatform):
             driver.switch_to.default_content()
 
         except TimeoutException:
-<<<<<<< HEAD
-<<<<<<< HEAD
             logger.debug("Login attempt timed out.")
-=======
-            logger.debug(
-                f"Already logged in to browser with user profile "
-                f'"{self.settings.platform_settings.espn_chrome_user_profile}".\n'
-            )
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-            logger.debug("Login attempt timed out.")
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 
         # retrieve and display session cookies needed for ESPN FF API authentication and extract their values
         espn_session_cookies = WebDriverWait(driver, timeout=60).until(lambda d: self._get_espn_session_cookies(d))

@@ -154,15 +154,7 @@ class PlayoffProbabilities(FFMWRPythonObjectJson):
         week_for_report: int,
         standings: List[BaseTeam],
         remaining_matchups: Dict[str, List[Tuple[BaseMatchup]]],
-<<<<<<< HEAD
-<<<<<<< HEAD
     ) -> Optional[Dict[str, List[Any]]]:
-=======
-    ) -> Union[None, Dict[str, List[Any]]]:
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-    ) -> Optional[Dict[str, List[Any]]]:
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         logger.debug("Calculating playoff probabilities.")
 
         teams_for_playoff_probs = {}

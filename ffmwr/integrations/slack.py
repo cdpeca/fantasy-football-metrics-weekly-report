@@ -43,15 +43,7 @@ class SlackIntegration(BaseIntegration):
         except SlackApiError as e:
             logger.error(f"Slack client error: {e}")
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     def _list_channels(self) -> Future | SlackResponse:
-=======
-    def _list_channels(self) -> Union[Future, SlackResponse]:
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-    def _list_channels(self) -> Future | SlackResponse:
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
         """Required Slack app scopes: channels:read, groups:read, mpim:read, im:read"""
         logger.debug("Listing Slack channels.")
         try:

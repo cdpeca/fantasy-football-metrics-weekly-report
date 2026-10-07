@@ -1,5 +1,4 @@
 services:
-<<<<<<< HEAD
     app:
         image: ghcr.io/uberfastman/fantasy-football-metrics-weekly-report:21.0.4 # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
         platform: linux/amd64
@@ -8,13 +7,3 @@ services:
         volumes:
             - /etc/localtime:/etc/localtime:ro # sync container timezone with host
             - .:/opt/ffmwr # mount host repository directory
-=======
-  app:
-    image: ghcr.io/uberfastman/fantasy-football-metrics-weekly-report:20.0.0  # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
-    platform: linux/amd64
-    ports:
-    - "5001:5000"
-    volumes:
-    - /etc/localtime:/etc/localtime:ro   # sync container timezone with host
-    - .:/opt/ffmwr   # mount host repository directory
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)

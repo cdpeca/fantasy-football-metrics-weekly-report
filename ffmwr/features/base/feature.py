@@ -5,21 +5,11 @@ import json
 from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from typing import Any, Dict, Type
 
 from ffmwr.utilities.constants import nfl_team_abbreviation_conversions, nfl_team_abbreviations
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.utils import FFMWRPythonObjectJson, generate_normalized_player_key
-=======
-from typing import Any, Dict
-
-from ffmwr.utilities.logger import get_logger
-from ffmwr.utilities.utils import FFMWRPythonObjectJson
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
 logger = get_logger(__name__, propagate=False)
 
@@ -31,20 +21,14 @@ class BaseFeature(ABC, FFMWRPythonObjectJson):
         feature_web_base_url: str,
         week_for_report: int,
         data_dir: Path,
-<<<<<<< HEAD
         exclude_dst: bool = False,
-=======
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         refresh: bool = False,
         save_data: bool = False,
         offline: bool = False,
     ):
         """Base Feature class for retrieving data from the web, saving, and loading it."""
         super().__init__()
-<<<<<<< HEAD
         self.excluded_attributes.append("raw_feature_data")
-=======
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
         self.feature_type_str: str = feature_type.replace(" ", "_").lower()
         self.feature_type_title: str = feature_type.replace("_", " ").title()
@@ -60,11 +44,8 @@ class BaseFeature(ABC, FFMWRPythonObjectJson):
         self.save_data: bool = save_data
         self.offline: bool = offline
 
-<<<<<<< HEAD
         self.exclude_dst: bool = exclude_dst
 
-=======
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
         self.raw_feature_data: Dict[str, Any] = {}
         self.feature_data: Dict[str, Any] = {}
 
@@ -122,7 +103,6 @@ class BaseFeature(ABC, FFMWRPythonObjectJson):
         if self.save_data:
             self.save_to_json_file(self.feature_data_file_path)
 
-<<<<<<< HEAD
     def _get_player_feature_stats(
         self,
         player_first_name: str,
@@ -173,8 +153,6 @@ class BaseFeature(ABC, FFMWRPythonObjectJson):
             "position_type": player_position_type,
         }
 
-=======
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
     @abstractmethod
     def _get_feature_data(self) -> None:
         raise NotImplementedError

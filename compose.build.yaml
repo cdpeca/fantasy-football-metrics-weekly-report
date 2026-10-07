@@ -1,5 +1,4 @@
 services:
-<<<<<<< HEAD
     app:
         build:
             context: .
@@ -8,14 +7,3 @@ services:
                 - BUILD_PLATFORM=linux/amd64
                 - PYTHON_VERSION_MAJOR=3
                 - PYTHON_VERSION_MINOR=13
-=======
-
-  app:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-      args: # DO NOT EDIT - VERSIONING SET AUTOMATICALLY
-      - BUILD_PLATFORM=linux/amd64
-      - PYTHON_VERSION_MAJOR=3
-      - PYTHON_VERSION_MINOR=13
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)

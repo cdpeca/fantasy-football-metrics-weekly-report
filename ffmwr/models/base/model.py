@@ -12,11 +12,7 @@ from ffmwr.features.bad_boy import BadBoyFeature
 from ffmwr.features.beef import BeefFeature
 from ffmwr.features.high_roller import HighRollerFeature
 from ffmwr.utilities.settings import AppSettings
-<<<<<<< HEAD
 from ffmwr.utilities.utils import FFMWRPythonObjectJson, generate_normalized_player_key
-=======
-from ffmwr.utilities.utils import FFMWRPythonObjectJson
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 
 
 class BaseLeague(FFMWRPythonObjectJson):

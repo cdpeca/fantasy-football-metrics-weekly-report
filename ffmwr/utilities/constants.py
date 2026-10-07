@@ -36,7 +36,6 @@ nfl_team_abbreviations: List[str] = [
     "WAS",
 ]
 
-<<<<<<< HEAD
 # reference dict to convert between commonly used alternate team abbreviations
 nfl_team_abbreviation_conversions: Dict[str, str] = {"JAC": "JAX", "LA": "LAR", "WSH": "WAS"}
 
@@ -112,11 +111,6 @@ nfl_team_abbreviations_to_names: Dict[str, str] = {
     "WAS": "Washington Commanders",
 }
 
-=======
-# small reference dict to convert between commonly used alternate team abbreviations
-nfl_team_abbreviation_conversions: Dict[str, str] = {"JAC": "JAX", "LA": "LAR", "WSH": "WAS"}
-
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
 # prohibited player statuses to check team coaching efficiency eligibility if dq_ce = True
 prohibited_statuses: Dict[str, str] = {
     "O": "Out",

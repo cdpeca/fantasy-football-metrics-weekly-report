@@ -5,33 +5,17 @@ import os
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import List, Dict
+from typing import List
 
 from ffmwr.calculate.coaching_efficiency import CoachingEfficiency
 from ffmwr.calculate.metrics import CalculateMetrics
 from ffmwr.calculate.points_by_position import PointsByPosition
 from ffmwr.calculate.season_averages import SeasonAverageCalculator
-<<<<<<< HEAD
-<<<<<<< HEAD
 from ffmwr.dao.platforms.base.platform import BasePlatform
 from ffmwr.models.base.model import BaseLeague, BaseTeam
 from ffmwr.report.data import ReportData
 from ffmwr.report.pdf.generator import PdfGenerator
 from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
-=======
-from ffmwr.models.base.model import BaseLeague, BaseTeam
-=======
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
-from ffmwr.dao.platforms.base.platform import BasePlatform
-from ffmwr.models.base.model import BaseLeague, BaseTeam
-from ffmwr.report.data import ReportData
-from ffmwr.report.pdf.generator import PdfGenerator
-<<<<<<< HEAD
-from ffmwr.utilities.app import platform_data_factory, patch_http_connection_pool
->>>>>>> 7d5cbd8 (refactored entire codebase into sudirectory, linted using ruff and bandit, improved logging, cleaned up some runtime business logic)
-=======
-from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
->>>>>>> fc231fd (v21.0.0 change project from requirements.txt to pyproject.toml, fix gitpython bug, fix empty high roller data bug, add pre-deploy script for automated versioning, change github actions image to uv python, change docker image to uv python, and update documentation)
 from ffmwr.utilities.logger import get_logger
 from ffmwr.utilities.settings import AppSettings
 from ffmwr.utilities.utils import format_platform_display
@@ -340,7 +324,6 @@ class FantasyFootballReport(object):
                             time_series_luck[team.name] = {'name': team.name, 'wins': wins, 'losses': losses}
             week_counter += 1
 
-<<<<<<< HEAD
 
         # ============================================================
         # Season Luck
@@ -350,14 +333,6 @@ class FantasyFootballReport(object):
         # Calculate Season Luck Record and resolve ties
         sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
         team_index = 0
-=======
-        # Calculate Season Luck Record and resolve ties
-
-        sorted_time_series_luck: Dict = dict(sorted(time_series_luck.items(), key=lambda x: list(x[1].values())[1], reverse=True))
-
-        team_index = 0
-
->>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
         for i in sorted_time_series_luck:
             team_index += 1
             if team_index == 1:
@@ -389,23 +364,13 @@ class FantasyFootballReport(object):
                             wins = sorted_time_series_luck[i]['wins']
                             losses = sorted_time_series_luck[i]['losses']
                             season_luck = sorted_time_series_luck[i]['season_luck']
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> a9e2107 (updated luck table to support new columns)
                             team_luck_data_entry.extend(
                                 [
                                     team.weekly_overall_record.get_record_str(),
                                     f"{wins}-{losses} ({season_luck})"
                                 ]
                             )
-<<<<<<< HEAD
                             # team_luck_data_entry.append(team.weekly_overall_record.get_record_str() + " / " + str(wins) + "-" + str(losses) + " (" + str(season_luck) + ")")
-=======
-                            team_luck_data_entry.append(team.weekly_overall_record.get_record_str() + " / " + str(wins) + "-" + str(losses) + " (" + str(season_luck) + ")")
->>>>>>> 2249ac2 (Updated Weekly Luck Record function to also calculate and report Season Luck Record and Ranking/Place)
-=======
->>>>>>> a9e2107 (updated luck table to support new columns)
 
         # add season total optimal points to optimal points data
         sorted_season_total_optimal_points_data = dict(
@@ -472,13 +437,8 @@ class FantasyFootballReport(object):
         report_footer_text = (
             f"<para alignment='center'>"
             f"Report generated {datetime.now():%Y-%b-%d %H:%M:%S} for {self.platform_display} "
-<<<<<<< HEAD
             f'Fantasy Football league "{self.league.name}" with id {self.league_id} '
             f'(<a href="{self.league.url}" color=blue><u>{self.league.url}</u></a>).'
-=======
-            f"Fantasy Football league \"{self.league.name}\" with id {self.league_id} "
-            f"(<a href=\"{self.league.url}\" color=blue><u>{self.league.url}</u></a>)."
->>>>>>> 4b14ce0 (removed ads)
             f"<br></br><br></br><br></br>"
             f"</para>"
         )
