@@ -342,9 +342,8 @@ class CalculateMetrics(object):
             ranked_team_name = team.name
             ranked_team_manager = team.manager_str
             ranked_luck = f"{team.luck:.2f}%"
-            weekly_overall_record = team.weekly_overall_record.get_record_str()
 
-            luck_results_data.append([place, ranked_team_name, ranked_team_manager, ranked_luck, weekly_overall_record])
+            luck_results_data.append([place, ranked_team_name, ranked_team_manager, ranked_luck])
 
             place += 1
         return luck_results_data
