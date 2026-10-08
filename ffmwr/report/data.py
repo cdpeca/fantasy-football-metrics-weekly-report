@@ -137,16 +137,13 @@ class ReportData(object):
             create_z_score_data = False
         elif any(z_score_val is None for z_score_val in z_score_results.values()):
             create_z_score_data = True
-            z_score_results = {
-                team_id: 0 if not z_score_val else z_score_val for team_id, z_score_val in z_score_results.items()
-            }
         else:
             create_z_score_data = True
 
         if create_z_score_data:
-            for k_v in sorted(z_score_results.items(), key=lambda x: x[1], reverse=True):
+            for k_v in sorted(z_score_results.items(), key=lambda x: float("-inf") if x[1] is None else x[1], reverse=True):
                 z_score = k_v[1]
-                if z_score:
+                if z_score is not None:
                     z_score = round(float(z_score), 2)
                 else:
                     z_score = "N/A"
@@ -154,6 +151,16 @@ class ReportData(object):
                 team = self.teams_results[k_v[0]]
                 self.data_for_z_scores.append([z_score_rank, team.name, team.manager_str, z_score])
                 z_score_rank += 1
+
+            # Rank available displayed Z-scores; unavailable values have no place.
+            available_scores = [row[3] for row in self.data_for_z_scores if row[3] != "N/A"]
+            for row in self.data_for_z_scores:
+                if row[3] == "N/A":
+                    row[0] = "N/A"
+                else:
+                    row[0] = str(1 + sum(score > row[3] for score in available_scores))
+                    if available_scores.count(row[3]) > 1:
+                        row[0] += "*"
 
         # points by position data
         points_by_position = PointsByPosition(league, week_for_report)

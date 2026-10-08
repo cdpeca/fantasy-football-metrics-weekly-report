@@ -442,59 +442,21 @@ class CalculateMetrics(object):
             groups = [list(group) for key, group in itertools.groupby(results_data, lambda x: x[3])]
             num_ties = self.count_ties(groups)
 
-        # if there are ties, record them and break them if possible
-        if num_ties > 0:
-            ties_count = 0
-            team_index = 0
-            place = 1
-            while ties_count != num_ties:
-                for group in groups:
-                    group_has_ties = len(group) > 1 and "DQ" not in group[0]
-                    if group_has_ties:
-                        ties_count += sum(range(len(group)))
-
-                    for team in group:
-                        if tie_type == "power_ranking":
-                            results_data[team_index] = [
-                                str(team[0]) + ("*" if group_has_ties else ""),
-                                team[1],
-                                team[2],
-                            ]
-                        elif tie_type == "score" and break_ties:
-                            results_data[team_index] = [str(place), team[1], team[2], team[3]]
-                            if group.index(team) != (len(group) - 1):
-                                place += 1
-                        elif tie_type == "bad_boy":
-                            results_data[team_index] = [
-                                str(place) + ("*" if group_has_ties else ""),
-                                team[1],
-                                team[2],
-                                team[3],
-                                team[4],
-                                team[5],
-                            ]
-                        elif tie_type == "high_roller":
-                            results_data[team_index] = [
-                                str(place) + ("*" if group_has_ties else ""),
-                                team[1],
-                                team[2],
-                                team[3],
-                                team[4],
-                                team[5],
-                            ]
-                        else:
-                            results_data[team_index] = [
-                                str(place) + ("*" if group_has_ties else ""),
-                                team[1],
-                                team[2],
-                                team[3],
-                            ]
-
-                        if tie_type == "score":
-                            results_data[team_index].append(team[4])
-
-                        team_index += 1
-                    place += 1
+        # Preserve metric values in power rankings; other tables show ordinal places.
+        # Advancing by group size gives competition ranks (1, 2, 2, 4).
+        place = 1
+        for group in groups:
+            group_has_ties = len(group) > 1 and "DQ" not in group[0]
+            for offset, team in enumerate(group):
+                if tie_type == "power_ranking":
+                    team[0] = str(team[0]).rstrip("*") + ("*" if group_has_ties else "")
+                elif tie_type == "score" and break_ties:
+                    team[0] = str(place + offset)
+                elif "DQ" in team:
+                    team[0] = str(place + offset)
+                else:
+                    team[0] = str(place) + ("*" if group_has_ties else "")
+            place += len(group)
 
         if tie_type == "bad_boy":
             groups = [list(group) for key, group in itertools.groupby(results_data, lambda x: x[3])]
@@ -529,11 +491,8 @@ class CalculateMetrics(object):
         place = 1
         for group in groups:
             for team in sorted(group, key=lambda x: x[-1], reverse=True):
-                if groups.index(group) != 0:
+                if break_ties:
                     team[0] = place
-                else:
-                    if break_ties:
-                        team[0] = place
                 resolved_score_results_data.append(team)
                 place += 1
 
@@ -658,7 +617,7 @@ class CalculateMetrics(object):
                     team[2] = f"{team[2]} ({place})"
 
                 resolved_season_average_results_data.append(team)
-            place += 1
+            place += len(group)
 
         return resolved_season_average_results_data
 
@@ -866,12 +825,10 @@ class CalculateMetrics(object):
     def get_ranks_for_metric(
         data_for_metric: List[List[Any]], power_ranked_teams: Dict[str, Dict[str, Any]], metric_ranking_key: str
     ):
-        rank = 1
         for team in data_for_metric:
             for team_rankings in power_ranked_teams.values():
                 if team[1] == team_rankings["name"]:
-                    team_rankings[metric_ranking_key] = rank
-            rank += 1
+                    team_rankings[metric_ranking_key] = int(str(team[0]).rstrip("*"))
 
     def calculate_power_rankings(
         self,
