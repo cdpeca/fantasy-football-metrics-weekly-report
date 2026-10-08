@@ -337,7 +337,11 @@ class FantasyFootballReport(object):
         for team_optimal_points_data_entry in report_data.data_for_optimal_scores:
             for team_index, team_name, season_total_optimal_points in list_sorted_season_total_optimal_points_data:
                 if team_optimal_points_data_entry[1] == team_name:
-                    place = team_index + 1
+                    displayed_total = round(season_total_optimal_points, 2)
+                    place = 1 + sum(
+                        round(total, 2) > displayed_total
+                        for total in sorted_season_total_optimal_points_data.values()
+                    )
                     total_optimal_points_ranked = f"{round(season_total_optimal_points, 2):.2f} ({place})"
                     team_optimal_points_data_entry.append(total_optimal_points_ranked)
 
