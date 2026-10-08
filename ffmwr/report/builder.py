@@ -12,7 +12,7 @@ from ffmwr.calculate.metrics import CalculateMetrics
 from ffmwr.calculate.points_by_position import PointsByPosition
 from ffmwr.calculate.season_averages import SeasonAverageCalculator
 from ffmwr.dao.platforms.base.platform import BasePlatform
-from ffmwr.models.base.model import BaseLeague, BaseTeam
+from ffmwr.models.base.model import BaseLeague
 from ffmwr.report.data import ReportData
 from ffmwr.report.pdf.generator import PdfGenerator
 from ffmwr.utilities.app import patch_http_connection_pool, platform_data_factory
