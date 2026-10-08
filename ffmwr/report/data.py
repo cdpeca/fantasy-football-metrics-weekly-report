@@ -141,7 +141,11 @@ class ReportData(object):
             create_z_score_data = True
 
         if create_z_score_data:
-            for k_v in sorted(z_score_results.items(), key=lambda x: float("-inf") if x[1] is None else x[1], reverse=True):
+            for k_v in sorted(
+                z_score_results.items(),
+                key=lambda x: float("-inf") if x[1] is None else x[1],
+                reverse=True,
+            ):
                 z_score = k_v[1]
                 if z_score is not None:
                     z_score = round(float(z_score), 2)
